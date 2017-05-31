@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final String TAG = "MONITOR";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,30 +26,18 @@ public class MainActivity extends AppCompatActivity {
         Bingresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.length() == 0 || pass.length() == 0) {
-
-                    Toast datos = Toast.makeText(getApplicationContext(), "Faltan datos", Toast.LENGTH_LONG);
-                    datos.show();
-
+                //Se obtienen los datos que se ingresan en el layout
+                String username = user.getText().toString();
+                String password = pass.getText().toString();
+                if (username.equals("lalo") && password.equals("admin")) {
+                    //Mensaje en Android monitor
+                    Log.d(TAG, "Has iniciado sesion con exito " + username);
+                    //Abre nuevo activity
+                    Intent intent = new Intent(v.getContext(), MenuUsuario.class);
+                    startActivityForResult(intent, 0);
                 } else {
-                    //Toast datos1 = Toast.makeText(getApplicationContext(), "Datos OK", Toast.LENGTH_LONG);
-                    //datos1.show();
-                    //Intent intent = new Intent(v.getContext(), MenuUsuario.class);
-                    //startActivityForResult(intent, 0);
-
-                    //if(user.getText().toString().isEmpty() && pass.getText().toString() == "admin"){
-
-                    if (user.equals("lalo") && pass.equals("admin")) {
-                        Log.d("TAG", "Has iniciado sesion con exito " + user.getText().toString());
-                        Toast datos1 = Toast.makeText(getApplicationContext(), "Bienvenido: " + user.getText().toString(), Toast.LENGTH_LONG);
-                        datos1.show();
-
-                        Intent intent = new Intent(v.getContext(), MenuUsuario.class);
-                        startActivityForResult(intent, 0);
-                    } else {
-                        Toast datos2 = Toast.makeText(getApplicationContext(), "Usuario incorrecto, estas pendeje", Toast.LENGTH_LONG);
-                        datos2.show();
-                    }
+                    //Mensaje Error
+                    Toast.makeText(getApplicationContext(), "Usuario incorrecto, estas pendeje", Toast.LENGTH_LONG).show();
                 }
             }
         });
