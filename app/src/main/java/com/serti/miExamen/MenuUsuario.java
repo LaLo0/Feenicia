@@ -1,6 +1,12 @@
 package com.serti.miExamen;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,9 +18,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import java.io.File;
 
 public class MenuUsuario extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    // Boton e imagen
+    private ImageView img = (ImageView) findViewById(R.id.imgMostrar);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +36,15 @@ public class MenuUsuario extends AppCompatActivity
         setContentView(R.layout.activity_menu_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //Buton de Email
+        // FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //fab.setOnClickListener(new View.OnClickListener() {
+        //  @Override
+        // public void onClick(View view) {
+        //   Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //          .setAction("Action", null).show();
+        //}
+        //});
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +54,38 @@ public class MenuUsuario extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Button btn_foto = (Button) findViewById(R.id.btn_camara);
+        //ImageView img = (ImageView) findViewById(R.id.imgMostrar);
+
+        btn_foto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //intent para llamar a la camara
+                Intent Camaraintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //Carpeta en la memoria interna
+                File carimg = new File(Environment.getExternalStorageDirectory(), "FeenciaIMG");
+                carimg.mkdirs();
+                //Nombre de la imagen
+                File image = new File(carimg, "Foto.jpg");
+                Uri urisaveimage = Uri.fromFile(image);
+                //indicamos que queremos guardar la imagen
+                Camaraintent.putExtra(MediaStore.EXTRA_OUTPUT, urisaveimage);
+                //Lanzar camara
+                startActivityForResult(Camaraintent, 1);
+            }
+        });
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        //comprobando si la foto se realizo
+        if (requestCode == 1 && requestCode == RESULT_OK){
+            //Se crea bitmap aunque Aun no se que es eso con la imagen almacenada
+            Bitmap bmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/Feencia/"+"Foto.jpg");
+            //se añade el bitmap al ImgView para mostrarlo en pantalla
+            img.setImageBitmap(bmap);
+        }
     }
 
     @Override
