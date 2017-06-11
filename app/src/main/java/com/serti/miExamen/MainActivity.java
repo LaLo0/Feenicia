@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 //Se obtienen los datos que se ingresan en el layout
                 String username = user.getText().toString();
                 String password = pass.getText().toString();
+
                 if (username.equals("lalo") && password.equals("admin")) {
                     //Mensaje en Android monitor
                     Log.d(TAG, "Has iniciado sesion con exito " + username);

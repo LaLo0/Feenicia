@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.serti.miExamen">
 
-    //permiso que nos permitirá hacer cambios y registros, crea una carpeta y guarda la imagen en ella.
+    <!--permiso que nos permitirá hacer cambios y registros, crea una carpeta y guarda la imagen en ella.-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
@@ -22,7 +22,8 @@
         <activity
             android:name=".MenuUsuario"
             android:label="@string/title_activity_menu_usuario"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

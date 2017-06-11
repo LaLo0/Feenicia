@@ -27,24 +27,25 @@ public class MenuUsuario extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // Boton e imagen
-    private ImageView img = (ImageView) findViewById(R.id.imgMostrar);
+    //private ImageView img = (ImageView) findViewById(R.id.imgMostrar);
+    //Button btn_foto = (Button) findViewById(R.id.btn_camara);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+      super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_usuario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Buton de Email
-        // FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-        //  @Override
-        // public void onClick(View view) {
-        //   Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        //          .setAction("Action", null).show();
-        //}
-        //});
+         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+          @Override
+         public void onClick(View view) {
+           Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                  .setAction("Action", null).show();
+        }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,7 +56,7 @@ public class MenuUsuario extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Button btn_foto = (Button) findViewById(R.id.btn_camara);
+        Button btn_foto = (Button) this.findViewById(R.id.btn_camara);
         //ImageView img = (ImageView) findViewById(R.id.imgMostrar);
 
         btn_foto.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,7 @@ public class MenuUsuario extends AppCompatActivity
                 //intent para llamar a la camara
                 Intent Camaraintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //Carpeta en la memoria interna
-                File carimg = new File(Environment.getExternalStorageDirectory(), "FeenciaIMG");
+               File carimg = new File(Environment.getExternalStorageDirectory(), "Feencia");
                 carimg.mkdirs();
                 //Nombre de la imagen
                 File image = new File(carimg, "Foto.jpg");
@@ -77,14 +78,14 @@ public class MenuUsuario extends AppCompatActivity
         });
 
     }
-
+    //private ImageView img = (ImageView) this.findViewById(R.id.imgMostrar);
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         //comprobando si la foto se realizo
         if (requestCode == 1 && requestCode == RESULT_OK){
             //Se crea bitmap aunque Aun no se que es eso con la imagen almacenada
             Bitmap bmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/Feencia/"+"Foto.jpg");
             //se añade el bitmap al ImgView para mostrarlo en pantalla
-            img.setImageBitmap(bmap);
+          // img.setImageBitmap(bmap);
         }
     }
 
