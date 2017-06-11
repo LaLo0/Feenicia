@@ -29,6 +29,7 @@ public class MenuUsuario extends AppCompatActivity
     // Boton e imagen
     //private ImageView img = (ImageView) findViewById(R.id.imgMostrar);
     //Button btn_foto = (Button) findViewById(R.id.btn_camara);
+    private ImageView img;
 
 
     @Override
@@ -57,8 +58,8 @@ public class MenuUsuario extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Button btn_foto = (Button) this.findViewById(R.id.btn_camara);
-        //ImageView img = (ImageView) findViewById(R.id.imgMostrar);
 
+        img = (ImageView)this.findViewById(R.id.imgMostrar);
         btn_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,15 +79,15 @@ public class MenuUsuario extends AppCompatActivity
         });
 
     }
-    //private ImageView img = (ImageView) this.findViewById(R.id.imgMostrar);
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         //comprobando si la foto se realizo
-        if (requestCode == 1 && requestCode == RESULT_OK){
+        //if (requestCode == 1 && requestCode == RESULT_OK){
             //Se crea bitmap aunque Aun no se que es eso con la imagen almacenada
             Bitmap bmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/Feencia/"+"Foto.jpg");
             //se añade el bitmap al ImgView para mostrarlo en pantalla
-          // img.setImageBitmap(bmap);
-        }
+           img.setImageBitmap(bmap);
+        //}
     }
 
     @Override
